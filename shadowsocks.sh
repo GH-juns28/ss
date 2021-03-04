@@ -142,10 +142,10 @@ install_v2(){
 # Configure
 ss_conf(){
     mkdir /etc/shadowsocks-libev
-    cat >/etc/shadowsocks-libev/config2.json << EOF
+    cat >/etc/shadowsocks-libev/config.json << EOF
 {
     "server":"0.0.0.0",
-    "server_port":2053,
+    "server_port":443,
     "password":"$shadowsockspwd",
     "timeout":300,
     "method":"aes-256-gcm",
@@ -158,7 +158,7 @@ EOF
 Description=Shadowsocks-libev Server Service
 After=network.target
 [Service]
-ExecStart=/usr/local/bin/ss-server -c /etc/shadowsocks-libev/config2.json
+ExecStart=/usr/local/bin/ss-server -c /etc/shadowsocks-libev/config.json
 ExecReload=/bin/kill -HUP \$MAINPID
 Restart=on-failure
 [Install]
@@ -206,7 +206,7 @@ print_ss_info(){
     clear
     echo "\033[1;32mCongratulations, Shadowsocks-libev server install completed\033[0m"
     echo "Your Server IP        :  ${domain} "
-    echo "Your Server Port      :  2053 "
+    echo "Your Server Port      :  443 "
     echo "Your Password         :  ${shadowsockspwd} "
     echo "Your Encryption Method:  aes-256-gcm "
     echo "Your Plugin           :  v2ray-plugin"
